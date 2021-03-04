@@ -50,7 +50,11 @@ const Pointer = () => {
   function draw() {
     cursorElement.style.top = `${mouse.y}px`;
     cursorElement.style.left = `${mouse.x}px`;
-    cursorElement.style.opacity = `0.8`;
+    if (mouse.isVisible) {
+      cursorElement.style.opacity = `0.8`;
+    } else {
+      cursorElement.style.opacity = `0`;
+    }
   }
 
   function trackCursor(event) {
@@ -68,9 +72,9 @@ const Pointer = () => {
   function unregisterEventListener() {
     document.removeEventListener("mousemove", trackCursor);
     document.body.classList.remove("no-cursor");
-    cursorElement.style.opacity = "0";
     cursorListener = null;
     mouse.isVisible = false;
+    requestAnimationFrame(draw);
   }
 
   function initCursorElement() {
