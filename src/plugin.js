@@ -68,6 +68,7 @@ const Pointer = () => {
   function unregisterEventListener() {
     document.removeEventListener("mousemove", trackCursor);
     document.body.classList.remove("no-cursor");
+    cursorElement.style.opacity = "0";
     cursorListener = null;
     mouse.isVisible = false;
   }
