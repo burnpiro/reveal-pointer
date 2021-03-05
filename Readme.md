@@ -1,8 +1,10 @@
-# RevealJS Pointer plugin
+# RevealJS pointer plugin (1.5KB gzipped)
 
 Changes your mouse into a pointer when necessary. [Demo](https://burnpiro.github.io/presentation-template/#/) ("q", `18px`, `red`).
 
 > This plugin only works with [RevealJS](https://revealjs.com/) `v4.x` or higher.
+
+No external dependencies, __only 2.6KB  | <1.5KB gzipped__.
 
 ## Installation
 
