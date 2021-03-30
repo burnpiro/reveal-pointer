@@ -13,6 +13,11 @@ const Pointer = () => {
     y: 0,
     isVisible: false,
   };
+  const bodyOffset = {
+    x: 0,
+    y: 0,
+    scale: 1
+  }
 
   function getKeyCode(key) {
     return keys[key];
@@ -48,18 +53,36 @@ const Pointer = () => {
   }
 
   function draw() {
-    cursorElement.style.top = `${mouse.y}px`;
-    cursorElement.style.left = `${mouse.x}px`;
+    cursorElement.style.top = `${(mouse.y - bodyOffset.y)/bodyOffset.scale}px`;
+    cursorElement.style.left = `${(mouse.x - bodyOffset.x)/bodyOffset.scale}px`;
     if (mouse.isVisible) {
       cursorElement.style.opacity = `0.8`;
     } else {
       cursorElement.style.opacity = `0`;
+    }
+    if (bodyOffset.scale !== 1) {
+      cursorElement.style.width = `${options.pointerSize/bodyOffset.scale}px`;
+      cursorElement.style.height = `${options.pointerSize/bodyOffset.scale}px`;
+    } else {
+      cursorElement.style.width = `${options.pointerSize}px`;
+      cursorElement.style.height = `${options.pointerSize}px`;
     }
   }
 
   function trackCursor(event) {
     mouse.x = event.pageX;
     mouse.y = event.pageY;
+    const bodyStyle = document.body.style.transform;
+    if (bodyStyle !== '') {
+      const parts = bodyStyle.split(/\(|,|\)|\.|px|\s/gm)
+      bodyOffset.x = Number.parseInt(parts[1])
+      bodyOffset.y = Number.parseInt(parts[5])
+      bodyOffset.scale = Number.parseFloat(parts[9])
+    } else {
+      bodyOffset.x = 0
+      bodyOffset.y = 0
+      bodyOffset.scale = 1
+    }
     requestAnimationFrame(draw);
   }
 
@@ -94,7 +117,6 @@ const Pointer = () => {
   }
 
   function togglePointerActive() {
-    console.log("🍻");
     isPointerActive = !isPointerActive;
     if (isPointerActive) {
       registerCursor();
