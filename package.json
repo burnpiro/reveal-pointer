@@ -1,6 +1,6 @@
 {
   "name": "reveal.js-pointer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Mouse pointer for RevealJS lib",
   "main": "dist/pointer.js",
   "scripts": {
