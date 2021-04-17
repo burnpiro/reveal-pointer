@@ -121,6 +121,12 @@ const Pointer = () => {
     })();
   }
 
+  function setCursorColor(color) {
+    if (cursorElement != null) {
+      cursorElement.style.backgroundColor = color != null ? color : options.color
+    }
+  }
+
   function togglePointerActive() {
     isPointerActive = !isPointerActive;
     if (isPointerActive) {
@@ -145,6 +151,10 @@ const Pointer = () => {
       } else {
         togglePointerActive();
       }
+
+      deck.on("pointerColorChange", (event) => {
+        setCursorColor(event.color);
+      });
 
       initCursorElement();
     },
