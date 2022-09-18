@@ -48,6 +48,12 @@ const Pointer = () => {
     ) {
       options.alwaysVisible = false;
     }
+    if (
+      options.opacity == null ||
+      typeof options.opacity !== "number"
+    ) {
+      options.opacity = 0.8;
+    }
 
     options.keyCode = getKeyCode(options.key);
   }
@@ -60,7 +66,7 @@ const Pointer = () => {
       (mouse.x - bodyOffset.x) / bodyOffset.scale
     }px`;
     if (mouse.isVisible) {
-      cursorElement.style.opacity = `0.8`;
+      cursorElement.style.opacity = options.opacity.toString();
     } else {
       cursorElement.style.opacity = `0`;
     }
